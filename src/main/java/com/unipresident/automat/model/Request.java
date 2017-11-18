@@ -4,33 +4,53 @@ import java.util.Map;
 
 public class Request {
 
-    private int pageNum;
+    private String appkey;
 
-    private int pageSize;
+    private String sign;
 
-    private Map list;
+    private String timestamp;
 
-    public int getPageNum() {
-        return pageNum;
+    private String version;
+
+    private Map params;
+
+    public String getAppkey() {
+        return appkey;
     }
 
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
+    public void setAppkey(String appkey) {
+        this.appkey = appkey;
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public String getSign() {
+        return sign;
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+    public void setSign(String sign) {
+        this.sign = sign;
     }
 
-    public Map getList() {
-        return list;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public void setList(Map list) {
-        this.list = list;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public Map getParams() {
+        return params;
+    }
+
+    public void setParams(Map params) {
+        this.params = params;
     }
 }

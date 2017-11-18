@@ -1,10 +1,8 @@
 package com.unipresident.automat.controller;
 
+import com.unipresident.automat.model.Request;
 import com.unipresident.automat.model.Response;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,19 +11,13 @@ import java.util.Map;
 @RequestMapping("/api")
 public class ApiController {
 
-    @RequestMapping(value = "/goods_aisle_info", method = RequestMethod.GET)
-    public Response get_goods_aisle_info(
-            @RequestParam(value = "pageNum") int pageNum,
-            @RequestParam(value = "pageSize") int pageSize,
-            @RequestParam(value = "fno", required = false) String fno,
-            @RequestParam(value = "fstart_time") String fstart_time,
-            @RequestParam(value = "fend_time") String fend_time
-    ) {
-        System.out.println(pageNum);
-        System.out.println(pageSize);
-        System.out.println(fno);
-        System.out.println(fstart_time);
-        System.out.println(fend_time);
+    @RequestMapping(value = "/goods_aisle_info", method = RequestMethod.POST)
+    public Response get_goods_aisle_info(@RequestParam Request request) {
+
+        System.out.println("+============");
+        System.out.println(request);
+
+
 
         Response response = new Response();
         response.setResult(0);
@@ -44,22 +36,8 @@ public class ApiController {
         return response;
     }
 
-    @RequestMapping(value = "/transaction_detail", method = RequestMethod.GET)
-    public Response get_transaction_detail(
-            @RequestParam(value = "pageNum") int pageNum,
-            @RequestParam(value = "pageSize") int pageSize,
-            @RequestParam(value = "fno", required = false) String fno,
-            @RequestParam(value = "fstart_time") String fstart_time,
-            @RequestParam(value = "fend_time") String fend_time,
-            @RequestParam(value = "fpay_channel_id", required = false) String fpay_channel_id
-
-    ) {
-        System.out.println(pageNum);
-        System.out.println(pageSize);
-        System.out.println(fno);
-        System.out.println(fstart_time);
-        System.out.println(fend_time);
-        System.out.println(fpay_channel_id);
+    @RequestMapping(value = "/transaction_detail", method = RequestMethod.POST)
+    public Response get_transaction_detail(@ModelAttribute Request request) {
 
         Response response = new Response();
         response.setResult(0);
