@@ -14,10 +14,10 @@ public class ApiController {
     @RequestMapping(value = "/goods_aisle_info", method = RequestMethod.POST)
     public Response get_goods_aisle_info(@RequestBody Request request) {
 
-
+        System.out.println(request);
 
         Response response = new Response();
-        response.setResult(0);
+        response.setResult(1);
         response.setMessage("OK");
         Map[] data = new Map[1];
         Map map = new HashMap();
@@ -36,10 +36,10 @@ public class ApiController {
     @RequestMapping(value = "/transaction_detail", method = RequestMethod.POST)
     public Response get_transaction_detail(@RequestBody Request request) {
 
-
+        System.out.println(request);
 
         Response response = new Response();
-        response.setResult(0);
+        response.setResult(1);
         response.setMessage("OK");
         Map[] data = new Map[1];
         Map map = new HashMap();

@@ -1,6 +1,7 @@
 package com.unipresident.automat.model;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Params implements Serializable {
@@ -9,7 +10,7 @@ public class Params implements Serializable {
 
     private int pageSize;
 
-    private Map list;
+    private LinkedHashMap list;
 
     public int getPageNum() {
         return pageNum;
@@ -27,11 +28,11 @@ public class Params implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Map getList() {
+    public LinkedHashMap getList() {
         return list;
     }
 
-    public void setList(Map list) {
+    public void setList(LinkedHashMap list) {
         this.list = list;
     }
 }

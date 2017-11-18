@@ -1,5 +1,8 @@
 package com.unipresident.automat.utils;
 
+import com.unipresident.automat.model.Params;
+import com.unipresident.automat.model.Request;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,11 +16,17 @@ public class Signature {
     private static String version = "V1";
 
 
-    public static boolean checkParameters(Map params) {
+    public static int checkParameters(Request request) {
 
+        String appkey = request.getAppkey();
+        String sign = request.getSign();
+        String timestamp = request.getTimestamp();
+        String version = request.getVersion();
+        Params params = request.getParams();
 
+        
 
-        return false;
+        return 0;
     }
 
     private static String getSignatureStr(Map map) {
