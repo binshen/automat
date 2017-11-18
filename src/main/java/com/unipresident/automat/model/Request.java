@@ -1,8 +1,9 @@
 package com.unipresident.automat.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Request {
+public class Request implements Serializable {
 
     private String appkey;
 
@@ -12,7 +13,7 @@ public class Request {
 
     private String version;
 
-    private Map params;
+    private Params params;
 
     public String getAppkey() {
         return appkey;
@@ -46,11 +47,11 @@ public class Request {
         this.version = version;
     }
 
-    public Map getParams() {
+    public Params getParams() {
         return params;
     }
 
-    public void setParams(Map params) {
+    public void setParams(Params params) {
         this.params = params;
     }
 }

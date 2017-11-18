@@ -1,8 +1,9 @@
 package com.unipresident.automat.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Params {
+public class Params implements Serializable {
 
     private int pageNum;
 

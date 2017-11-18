@@ -12,10 +12,7 @@ import java.util.Map;
 public class ApiController {
 
     @RequestMapping(value = "/goods_aisle_info", method = RequestMethod.POST)
-    public Response get_goods_aisle_info(@RequestParam Request request) {
-
-        System.out.println("+============");
-        System.out.println(request);
+    public Response get_goods_aisle_info(@RequestBody Request request) {
 
 
 
@@ -37,7 +34,9 @@ public class ApiController {
     }
 
     @RequestMapping(value = "/transaction_detail", method = RequestMethod.POST)
-    public Response get_transaction_detail(@ModelAttribute Request request) {
+    public Response get_transaction_detail(@RequestBody Request request) {
+
+
 
         Response response = new Response();
         response.setResult(0);
