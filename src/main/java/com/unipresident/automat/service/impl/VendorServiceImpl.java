@@ -18,12 +18,12 @@ public class VendorServiceImpl implements VendorService {
     private VendorMapper vendorMapper;
 
     @Override
-    public List<VendorReplen> find_vendor_replen(String fno, String fstart_time, String fend_time) {
-        return vendorMapper.find_vendor_replen(fno, fstart_time, fend_time);
+    public List<VendorReplen> find_vendor_replen(int offset, int limit, String fno, String fstart_time, String fend_time) {
+        return vendorMapper.find_vendor_replen(offset, limit, fno, fstart_time, fend_time);
     }
 
     @Override
-    public List<VendorAlipay> find_vendor_alipay(String fno, String fstart_time, String fend_time, String fpay_channel_id) {
-        return vendorMapper.find_vendor_alipay(fno, fstart_time, fend_time, fpay_channel_id);
+    public List<VendorAlipay> find_vendor_alipay(int offset, int limit, String fno, String fstart_time, String fend_time, String[] fpay_channel_ids) {
+        return vendorMapper.find_vendor_alipay(offset, limit, fno, fstart_time, fend_time, fpay_channel_ids);
     }
 }

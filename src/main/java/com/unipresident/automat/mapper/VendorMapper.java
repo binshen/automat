@@ -13,13 +13,17 @@ import java.util.List;
 public interface VendorMapper {
 
     public List<VendorReplen> find_vendor_replen(
+            @Param("offset") int offset,
+            @Param("limit") int limit,
             @Param("fno") String fno,
             @Param("fstart_time") String fstart_time,
             @Param("fend_time") String fend_time);
 
     public List<VendorAlipay> find_vendor_alipay(
+            @Param("offset") int offset,
+            @Param("limit") int limit,
             @Param("fno") String fno,
             @Param("fstart_time") String fstart_time,
             @Param("fend_time") String fend_time,
-            @Param("fpay_channel_id") String fpay_channel_id);
+            @Param("fpay_channel_ids") String[] fpay_channel_ids);
 }

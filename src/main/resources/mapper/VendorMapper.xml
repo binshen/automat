@@ -6,7 +6,7 @@
     <select id="find_vendor_replen" resultType="com.unipresident.automat.entity.VendorReplen">
         select * from "T_VENDOR_REPLEN"
         <where>
-            <if test="fno!=''">
+            <if test="fno != null and fno!=''">
                 and "FNO" = #{fno}
             </if>
             <if test="true">
@@ -16,6 +16,8 @@
                 <![CDATA[ and "FADD_TIME" <= #{fend_time} ]]>
             </if>
         </where>
+        order by "FADD_TIME" desc
+        limit #{limit} offset #{offset}
     </select>
 
     <select id="find_vendor_alipay" resultType="com.unipresident.automat.entity.VendorAlipay">
@@ -23,7 +25,7 @@
         from "T_VENDOR_ALIPAY" a
         inner join "T_VENDOR_PRODUCT" b on a."FBARCODE" = b."FBARCODE"
         <where>
-            <if test="fno!=''">
+            <if test="fno != null and fno!=''">
                 and a."FNO" = #{fno}
             </if>
             <if test="true">
@@ -32,10 +34,15 @@
             <if test="true">
                 <![CDATA[ and a."FCREATED_ON" <= #{fend_time} ]]>
             </if>
-            <if test="fpay_channel_id!=''">
-                and a."FPAY_CHANNEL_ID" in (#{fpay_channel_id})
+            <if test="fpay_channel_ids != null and fpay_channel_ids != ''">
+                and a."FPAY_CHANNEL_ID" in
+                <foreach collection="fpay_channel_ids" index="index" item="fpay_channel_id" open="(" separator="," close=")">
+                    #{fpay_channel_id}
+                </foreach>
             </if>
         </where>
+        order by a."FPAY_CHANNEL_ID" desc
+        limit #{limit} offset #{offset}
     </select>
 
 </mapper>

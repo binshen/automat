@@ -36,3 +36,11 @@ spring:
 mybatis:
   mapper-locations: classpath*:/mapper/*Mapper.xml
   #type-aliases-package: com.unipresident.automat.entity
+
+logging:
+  level:
+    com:
+      unipresident:
+        automat:
+          mapper:
+            debug
