@@ -10,7 +10,7 @@ public class Params implements Serializable {
 
     private int pageSize;
 
-    private LinkedHashMap list;
+    private LinkedHashMap<String, String> list;
 
     public int getPageNum() {
         return pageNum;
@@ -28,11 +28,11 @@ public class Params implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public LinkedHashMap getList() {
+    public LinkedHashMap<String, String> getList() {
         return list;
     }
 
-    public void setList(LinkedHashMap list) {
+    public void setList(LinkedHashMap<String, String> list) {
         this.list = list;
     }
 }

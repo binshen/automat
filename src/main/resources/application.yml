@@ -6,10 +6,16 @@ server:
 
 spring:
   datasource:
-    url: jdbc:oracle:thin:@10.20.149.85:1521:ocnauto
-    username: root
-    password: xOlx8z9L7Pt6y9YI
-    #driver-class-name: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@10.20.149.85:1521:ocnauto
+#    username: root
+#    password: root
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+
+    url: jdbc:postgresql://localhost/vendor
+    username: postgres
+    password: 23420800
+    driver-class-name: org.postgresql.Driver
+
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 1
     minIdle: 3
@@ -29,4 +35,4 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:/mapper/*Mapper.xml
-  type-aliases-package: com.unipresident.automat.entity
+  #type-aliases-package: com.unipresident.automat.entity

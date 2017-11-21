@@ -1,5 +1,6 @@
 package com.unipresident.automat.model;
 
+import java.util.List;
 import java.util.Map;
 
 public class Response {
@@ -8,7 +9,7 @@ public class Response {
 
     private String message;
 
-    private Map[] data;
+    private List<?> data;
 
     public int getResult() {
         return result;
@@ -26,11 +27,11 @@ public class Response {
         this.message = message;
     }
 
-    public Map[] getData() {
+    public List<?> getData() {
         return data;
     }
 
-    public void setData(Map[] data) {
+    public void setData(List<?> data) {
         this.data = data;
     }
 }

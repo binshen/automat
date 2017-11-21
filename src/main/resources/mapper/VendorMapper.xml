@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC  "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.unipresident.automat.mapper.VendorMapper">
+
+    <select id="find_vendor_replen" resultType="com.unipresident.automat.entity.VendorReplen">
+        select * from "T_VENDOR_REPLEN"
+        <where>
+            <if test="fno!=''">
+                and "FNO" = #{fno}
+            </if>
+            <if test="true">
+                <![CDATA[ and "FADD_TIME" >= #{fstart_time} ]]>
+            </if>
+            <if test="true">
+                <![CDATA[ and "FADD_TIME" <= #{fend_time} ]]>
+            </if>
+        </where>
+    </select>
+
+    <select id="find_vendor_alipay" resultType="com.unipresident.automat.entity.VendorAlipay">
+        select a.*, b."FNAME" as "fsku_name"
+        from "T_VENDOR_ALIPAY" a
+        inner join "T_VENDOR_PRODUCT" b on a."FBARCODE" = b."FBARCODE"
+        <where>
+            <if test="fno!=''">
+                and a."FNO" = #{fno}
+            </if>
+            <if test="true">
+                <![CDATA[ and a."FCREATED_ON" >= #{fstart_time} ]]>
+            </if>
+            <if test="true">
+                <![CDATA[ and a."FCREATED_ON" <= #{fend_time} ]]>
+            </if>
+            <if test="fpay_channel_id!=''">
+                and a."FPAY_CHANNEL_ID" in (#{fpay_channel_id})
+            </if>
+        </where>
+    </select>
+
+</mapper>
