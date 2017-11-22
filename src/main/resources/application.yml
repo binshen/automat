@@ -35,12 +35,14 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:/mapper/*Mapper.xml
-  #type-aliases-package: com.unipresident.automat.entity
 
 logging:
+#  path: /var/log/
+  file: automat.log
   level:
+    root: ERROR
     com:
       unipresident:
         automat:
           mapper:
-            debug
+            DEBUG
