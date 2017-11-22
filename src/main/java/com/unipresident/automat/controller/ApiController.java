@@ -33,7 +33,13 @@ public class ApiController {
     @RequestMapping(value = "/vendor_replen", method = RequestMethod.POST)
     public Response get_vendor_replen(@ModelAttribute("request") Request request) {
 
-        System.out.println(request.getError_code());
+        Response response = new Response();
+        int error_code = request.getError_code();
+        if(error_code < 0) {
+            response.setCode(error_code);
+            response.setMessage("访问接口失败");
+            return response;
+        }
 
         int offset = 0;
         int limit = 20;
@@ -51,7 +57,6 @@ public class ApiController {
 
         List<VendorReplen> data = vendorService.find_vendor_replen(offset, limit, fno, fstart_time, fend_time);
 
-        Response response = new Response();
         response.setCode(1);
         response.setMessage("OK");
         response.setData(data);
@@ -61,7 +66,13 @@ public class ApiController {
     @RequestMapping(value = "/vendor_alipay", method = RequestMethod.POST)
     public Response get_vendor_alipay(@ModelAttribute("request") Request request) {
 
-        System.out.println(request.getError_code());
+        Response response = new Response();
+        int error_code = request.getError_code();
+        if(error_code < 0) {
+            response.setCode(error_code);
+            response.setMessage("访问接口失败");
+            return response;
+        }
 
         int offset = 0;
         int limit = 20;
@@ -77,12 +88,10 @@ public class ApiController {
         String fstart_time = params.getList().get("fstart_time");
         String fend_time = params.getList().get("fend_time");
         String fpay_channel_id = params.getList().get("fpay_channel_id");
-
         String[] fpay_channel_ids = StringUtils.isEmpty(fpay_channel_id)? null : fpay_channel_id.split(",");
 
         List<VendorAlipay> data = vendorService.find_vendor_alipay(offset, limit, fno, fstart_time, fend_time, fpay_channel_ids);
 
-        Response response = new Response();
         response.setCode(1);
         response.setMessage("OK");
         response.setData(data);

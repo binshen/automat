@@ -23,17 +23,17 @@ public class Signature {
         String appkey = request.getAppkey();
         String version = request.getVersion();
         String timestamp = request.getTimestamp();
-        if(StringUtils.isEmpty(appkey) || _appkey.equals(appkey)) {
+        if(StringUtils.isEmpty(appkey) || !_appkey.equals(appkey)) {
             return -1;
         }
 
-        if(StringUtils.isEmpty(version) || _version.equals(version)) {
+        if(StringUtils.isEmpty(version) || !_version.equals(version)) {
             return -2;
         }
 
         Date systemDate = new Date();
         long s_timestamp = systemDate.getTime();
-        long p_timestamp = Integer.parseInt(timestamp);
+        long p_timestamp = Long.parseLong(timestamp);
         if(Math.abs(s_timestamp - p_timestamp) > allowed_time_length) {
             return -3;
         }
