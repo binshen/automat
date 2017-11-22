@@ -9,7 +9,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class Signature {
 
@@ -17,6 +16,7 @@ public class Signature {
     private static String _secret = "qwertyuiop";
     private static String _version = "V1";
 
+    private static int allowed_time_length = 5 * 1000 * 60;
 
     public static int checkParameters(Request request) {
 
@@ -34,25 +34,22 @@ public class Signature {
         Date systemDate = new Date();
         long s_timestamp = systemDate.getTime();
         long p_timestamp = Integer.parseInt(timestamp);
-        if(Math.abs(s_timestamp - p_timestamp) > 5000) {
+        if(Math.abs(s_timestamp - p_timestamp) > allowed_time_length) {
             return -3;
         }
 
         String sign = request.getSign();
         Params params = request.getParams();
 
-        String _sign = getSignatureStr(appkey, version, params);
-        if(StringUtils.isEmpty(sign) || sign.equals(_sign)) {
+        String _sign = getSignatureStr(appkey, version, String.valueOf(p_timestamp), params);
+        if(StringUtils.isEmpty(sign) || !sign.equals(_sign)) {
             return -4;
         }
 
         return 1;
     }
 
-    private static String getSignatureStr(String appkey, String version, Params objParams) {
-
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String timestamp = format.format(new Date());
+    private static String getSignatureStr(String appkey, String version, String timestamp, Params objParams) {
 
         String params = JSON.toJSONString(objParams);
 
