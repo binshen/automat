@@ -1,15 +1,20 @@
 package com.unipresident.automat.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Params implements Serializable {
 
+    @JSONField(ordinal=1)
     private int pageNum;
 
+    @JSONField(ordinal=2)
     private int pageSize;
 
+    @JSONField(ordinal=3)
     private LinkedHashMap<String, String> list;
 
     public int getPageNum() {
