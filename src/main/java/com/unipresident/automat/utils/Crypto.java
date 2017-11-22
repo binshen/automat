@@ -1,6 +1,6 @@
 package com.unipresident.automat.utils;
 
-import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -15,36 +15,41 @@ public class Crypto {
      * @throws UnsupportedEncodingException
      */
     public static String md5(String str) {
-        String new_str = null;
         try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-            BASE64Encoder base64en = new BASE64Encoder();
-            new_str = base64en.encode(md5.digest(str.getBytes("utf-8")));
-        } catch (NoSuchAlgorithmException e1) {
-            e1.printStackTrace();
-        } catch (UnsupportedEncodingException e2) {
-            e2.printStackTrace();
+            MessageDigest digist = MessageDigest.getInstance("MD5");
+            byte[] rs = digist.digest(str.getBytes("UTF-8"));
+            StringBuffer digestHexStr = new StringBuffer();
+            for (int i = 0; i < 16; i++) {
+                digestHexStr.append(byteHEX(rs[i]));
+            }
+            return digestHexStr.toString();
+        } catch (Exception e) {
         }
-        return new_str;
+        return null;
+    }
+
+    public static String byteHEX(byte ib) {
+        char[] Digit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+        char[] ob = new char[2];
+        ob[0] = Digit[(ib >>> 4) & 0X0F];
+        ob[1] = Digit[ib & 0X0F];
+        return new String(ob);
     }
 
     /*
      * @param str  待加密的字符串
      * @return  加密后的字符串
-     * @throws UnsupportedEncodingException
      */
     public static String base64(String str){
-        byte[] tmp = null;
-        String new_str = null;
         try {
-            tmp = str.getBytes("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            return Base64.encodeBase64String(str.getBytes("UTF-8"));
+        } catch (Exception e) {
         }
-        if(tmp != null){
-            new_str = new BASE64Encoder().encode(tmp);
-        }
-        return new_str;
+        return null;
     }
 
+    public static void main(String[] args) {
+        System.out.println(md5("123qwe"));
+        System.out.println(base64("123qwe"));
+    }
 }
