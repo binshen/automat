@@ -5,8 +5,8 @@
 
     <groupId>com.uni-president</groupId>
     <artifactId>automat</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
 
     <name>automat</name>
     <description>API for Uni-Predident Vending Machine</description>
@@ -63,6 +63,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -82,9 +87,15 @@
             <version>9.4.1212</version>
         </dependency>
 
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.11</version>
+        </dependency>
     </dependencies>
 
     <build>
+        <finalName>automat</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
