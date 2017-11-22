@@ -1,8 +1,9 @@
 server:
   port: 8080
   session-timeout: 30
-  tomcat.max-threads: 0
-  tomcat.uri-encoding: UTF-8
+  tomcat:
+    max-threads: 0
+    uri-encoding: UTF-8
 
 spring:
   datasource:
@@ -46,3 +47,9 @@ logging:
         automat:
           mapper:
             DEBUG
+
+system:
+  appkey: 1234567890
+  secret: qwertyuiop
+  version: V1
+  interval: 300000

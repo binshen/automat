@@ -7,6 +7,7 @@ import com.unipresident.automat.model.Request;
 import com.unipresident.automat.model.Response;
 import com.unipresident.automat.service.VendorService;
 import com.unipresident.automat.utils.Signature;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +21,22 @@ public class ApiController {
     @Resource
     private VendorService vendorService;
 
+    @Value("${system.appkey}")
+    private String appkey;
+
+    @Value("${system.secret}")
+    private String secret;
+
+    @Value("${system.version}")
+    private String version;
+
+    @Value("${system.interval}")
+    private int interval;
+
     @ModelAttribute("request")
     public Request checkParameters(@RequestBody Request request) {
 
-        int error_code = Signature.checkParameters(request);
+        int error_code = Signature.checkParameters(request, appkey, version, interval, secret);
         request.setError_code(error_code);
 
         return request;

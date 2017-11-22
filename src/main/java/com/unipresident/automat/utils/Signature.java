@@ -12,36 +12,30 @@ import java.util.LinkedHashMap;
 
 public class Signature {
 
-    private static String _appkey = "1234567890";
-    private static String _secret = "qwertyuiop";
-    private static String _version = "V1";
-
-    private static int allowed_time_length = 5 * 1000 * 60;
-
-    public static int checkParameters(Request request) {
+    public static int checkParameters(Request request, String _appkey, String _version, int interval, String secret) {
 
         String appkey = request.getAppkey();
         String version = request.getVersion();
         String timestamp = request.getTimestamp();
-        if(StringUtils.isEmpty(appkey) || !_appkey.equals(appkey)) {
+        if(StringUtils.isEmpty(appkey) || !appkey.equals(_appkey)) {
             return -1;
         }
 
-        if(StringUtils.isEmpty(version) || !_version.equals(version)) {
+        if(StringUtils.isEmpty(version) || !version.equals(_version)) {
             return -2;
         }
 
-        Date systemDate = new Date();
-        long s_timestamp = systemDate.getTime();
+        Date sysDate = new Date();
+        long s_timestamp = sysDate.getTime();
         long p_timestamp = Long.parseLong(timestamp);
-        if(Math.abs(s_timestamp - p_timestamp) > allowed_time_length) {
+        if(Math.abs(s_timestamp - p_timestamp) > interval) {
             return -3;
         }
 
         String sign = request.getSign();
         Params params = request.getParams();
 
-        String _sign = getSignatureStr(appkey, version, String.valueOf(p_timestamp), params);
+        String _sign = getSignatureStr(appkey, version, String.valueOf(p_timestamp), secret, params);
         if(StringUtils.isEmpty(sign) || !sign.equals(_sign)) {
             return -4;
         }
@@ -49,11 +43,11 @@ public class Signature {
         return 1;
     }
 
-    private static String getSignatureStr(String appkey, String version, String timestamp, Params objParams) {
+    private static String getSignatureStr(String appkey, String version, String timestamp, String secret, Params objParams) {
 
         String params = JSON.toJSONString(objParams);
 
-        String sign = _secret + appkey + params + timestamp + version + _secret;
+        String sign = secret + appkey + params + timestamp + version + secret;
         sign = Crypto.md5(sign);
         sign = Crypto.base64(sign);
         return sign;
