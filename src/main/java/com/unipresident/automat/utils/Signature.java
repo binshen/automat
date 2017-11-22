@@ -43,7 +43,7 @@ public class Signature {
         return 1;
     }
 
-    private static String getSignatureStr(String appkey, String version, String timestamp, String secret, Params objParams) {
+    public static String getSignatureStr(String appkey, String version, String timestamp, String secret, Params objParams) {
 
         String params = JSON.toJSONString(objParams);
 
