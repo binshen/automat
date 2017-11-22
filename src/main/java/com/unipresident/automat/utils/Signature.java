@@ -52,23 +52,4 @@ public class Signature {
         sign = Crypto.base64(sign);
         return sign;
     }
-
-    public static void main(String[] args) {
-
-        LinkedHashMap list = new LinkedHashMap();
-        list.put("fno", "93000000");
-        list.put("fstart_time", "2017-11-15 00:00:00");
-        list.put("fend_time", "2017-11-16 00:00:00");
-
-        Params params = new Params();
-        params.setPageNum(1);
-        params.setPageSize(20);
-        params.setList(list);
-
-        String strParams = JSON.toJSONString(params);
-        System.out.println(strParams);
-
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(format.format(new Date()));
-    }
 }
