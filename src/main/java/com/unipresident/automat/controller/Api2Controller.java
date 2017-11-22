@@ -28,7 +28,7 @@ public class Api2Controller {
         System.out.println(fend_time);
 
         Response response = new Response();
-        response.setResult(0);
+        response.setCode(0);
         response.setMessage("OK");
 //        Map[] data = new Map[1];
 //        Map map = new HashMap();
@@ -62,7 +62,7 @@ public class Api2Controller {
         System.out.println(fpay_channel_id);
 
         Response response = new Response();
-        response.setResult(0);
+        response.setCode(0);
         response.setMessage("OK");
 //        Map[] data = new Map[1];
 //        Map map = new HashMap();

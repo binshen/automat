@@ -6,13 +6,12 @@ import com.unipresident.automat.model.Params;
 import com.unipresident.automat.model.Request;
 import com.unipresident.automat.model.Response;
 import com.unipresident.automat.service.VendorService;
+import com.unipresident.automat.utils.Signature;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -21,8 +20,20 @@ public class ApiController {
     @Resource
     private VendorService vendorService;
 
+    @ModelAttribute("request")
+    public Request checkParameters(@RequestBody Request request) {
+
+        int error_code = Signature.checkParameters(request);
+        request.setError_code(error_code);
+
+        return request;
+    }
+
+
     @RequestMapping(value = "/vendor_replen", method = RequestMethod.POST)
-    public Response get_vendor_replen(@RequestBody Request request) {
+    public Response get_vendor_replen(@ModelAttribute("request") Request request) {
+
+        System.out.println(request.getError_code());
 
         int offset = 0;
         int limit = 20;
@@ -41,14 +52,16 @@ public class ApiController {
         List<VendorReplen> data = vendorService.find_vendor_replen(offset, limit, fno, fstart_time, fend_time);
 
         Response response = new Response();
-        response.setResult(1);
+        response.setCode(1);
         response.setMessage("OK");
         response.setData(data);
         return response;
     }
 
     @RequestMapping(value = "/vendor_alipay", method = RequestMethod.POST)
-    public Response get_vendor_alipay(@RequestBody Request request) {
+    public Response get_vendor_alipay(@ModelAttribute("request") Request request) {
+
+        System.out.println(request.getError_code());
 
         int offset = 0;
         int limit = 20;
@@ -70,7 +83,7 @@ public class ApiController {
         List<VendorAlipay> data = vendorService.find_vendor_alipay(offset, limit, fno, fstart_time, fend_time, fpay_channel_ids);
 
         Response response = new Response();
-        response.setResult(1);
+        response.setCode(1);
         response.setMessage("OK");
         response.setData(data);
         return response;
