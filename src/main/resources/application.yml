@@ -48,6 +48,9 @@ logging:
           mapper:
             DEBUG
 
+page:
+  size: 20
+
 system:
   appkey: 1234567890
   secret: qwertyuiop

@@ -33,6 +33,9 @@ public class ApiController {
     @Value("${system.interval}")
     private int interval;
 
+    @Value("${page.size}")
+    private int page_size;
+
     @ModelAttribute("request")
     public Request checkParameters(@RequestBody Request request) {
 
@@ -54,15 +57,14 @@ public class ApiController {
             return response;
         }
 
-        int offset = 0;
-        int limit = 20;
-
         Params params = request.getParams();
         int pageNum = params.getPageNum();
+        if(pageNum < 1) pageNum = 1;
         int pageSize = params.getPageSize();
+        if(pageSize < 1) pageSize = page_size;
 
-        offset = (pageNum - 1) * pageSize;
-        limit = pageSize;
+        int offset = (pageNum - 1) * pageSize;
+        int limit = pageSize;
 
         String fno = params.getList().get("fno");
         String fstart_time = params.getList().get("fstart_time");
@@ -87,15 +89,14 @@ public class ApiController {
             return response;
         }
 
-        int offset = 0;
-        int limit = 20;
-
         Params params = request.getParams();
         int pageNum = params.getPageNum();
+        if(pageNum < 1) pageNum = 1;
         int pageSize = params.getPageSize();
+        if(pageSize < 1) pageSize = page_size;
 
-        offset = (pageNum - 1) * pageSize;
-        limit = pageSize;
+        int offset = (pageNum - 1) * pageSize;
+        int limit = pageSize;
 
         String fno = params.getList().get("fno");
         String fstart_time = params.getList().get("fstart_time");

@@ -1,12 +1,16 @@
 package com.unipresident.automat.controller;
 
+import com.unipresident.automat.entity.VendorAlipay;
+import com.unipresident.automat.entity.VendorReplen;
 import com.unipresident.automat.model.Response;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,20 +31,21 @@ public class Api2Controller {
         System.out.println(fstart_time);
         System.out.println(fend_time);
 
+        List<VendorReplen> data = new ArrayList<>();
+        VendorReplen vendorReplen = new VendorReplen();
+        vendorReplen.setFno("93000000");
+        vendorReplen.setFavm_goods_chn("13");
+        vendorReplen.setFbarcode("6925303781262");
+        vendorReplen.setFsku_name("雅哈[意式经典](PET280ml)");
+        vendorReplen.setFqty(5);
+        vendorReplen.setFadd_time("2017-11-16 11:00:08");
+        vendorReplen.setFio("1");
+        data.add(vendorReplen);
+
         Response response = new Response();
         response.setCode(0);
         response.setMessage("OK");
-//        Map[] data = new Map[1];
-//        Map map = new HashMap();
-//        map.put("fno", "93000000");
-//        map.put("favm_goods_chn", "13");
-//        map.put("fbarcode", "6925303781262");
-//        map.put("fsku_name", "雅哈[意式经典](PET280ml)");
-//        map.put("fqty", 5);
-//        map.put("fadd_time", "2017-11-16 11:00:08");
-//        map.put("fio", "1");
-//        data[0] = map;
-//        response.setData(data);
+        response.setData(data);
         return response;
     }
 
@@ -61,21 +66,22 @@ public class Api2Controller {
         System.out.println(fend_time);
         System.out.println(fpay_channel_id);
 
+        List<VendorAlipay> data = new ArrayList<>();
+        VendorAlipay vendorAlipay = new VendorAlipay();
+        vendorAlipay.setFcreated_on("2017-11-16 10:00:00");
+        vendorAlipay.setFbill_no("9300000201707011111");
+        vendorAlipay.setFno("93000000");
+        vendorAlipay.setFavm_goods_chn("13");
+        vendorAlipay.setFbarcode("6925303781262");
+        vendorAlipay.setFsku_name("雅哈[意式经典](PET280ml)");
+        vendorAlipay.setFbill_amount(5);
+        vendorAlipay.setFpay_channel_id("1");
+        data.add(vendorAlipay);
+
         Response response = new Response();
         response.setCode(0);
         response.setMessage("OK");
-//        Map[] data = new Map[1];
-//        Map map = new HashMap();
-//        map.put("fcreated_on", "2017-11-16 10:00:00");
-//        map.put("fbill_no", "9300000201707011111");
-//        map.put("fno", "93000000");
-//        map.put("favm_goods_chn", "13");
-//        map.put("fbarcode", "6925303781262");
-//        map.put("fsku_name", "雅哈[意式经典](PET280ml)");
-//        map.put("fbill_amount", 5);
-//        map.put("fpay_channel_id", "1");
-//        data[0] = map;
-//        response.setData(data);
+        response.setData(data);
         return response;
     }
 }
