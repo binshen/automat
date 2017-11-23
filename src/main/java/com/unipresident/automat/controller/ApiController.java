@@ -41,10 +41,8 @@ public class ApiController {
 
         int error_code = Signature.checkParameters(request, appkey, version, interval, secret);
         request.setError_code(error_code);
-
         return request;
     }
-
 
     @RequestMapping(value = "/vendor_replen", method = RequestMethod.POST)
     public Response get_vendor_replen(@ModelAttribute("request") Request request) {

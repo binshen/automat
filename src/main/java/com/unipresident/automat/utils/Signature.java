@@ -28,7 +28,7 @@ public class Signature {
         Date sysDate = new Date();
         long s_timestamp = sysDate.getTime();
         long p_timestamp = Long.parseLong(timestamp);
-        if(Math.abs(s_timestamp - p_timestamp) > interval) {
+        if(StringUtils.isEmpty(timestamp) || Math.abs(s_timestamp - p_timestamp) > interval) {
             return -3;
         }
 
@@ -46,7 +46,6 @@ public class Signature {
     public static String getSignatureStr(String appkey, String version, String timestamp, String secret, Params objParams) {
 
         String params = JSON.toJSONString(objParams);
-
         String sign = secret + appkey + params + timestamp + version + secret;
         sign = Crypto.md5(sign);
         sign = Crypto.base64(sign);
